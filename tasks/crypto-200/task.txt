@@ -1,0 +1,5 @@
+Cryptography is the science of methods of ensuring confidentiality (impossibility of reading information to outsiders), data integrity (impossibility of imperceptible change of information), authentication (authentication of authorship or other properties of the object), and the inability to refuse authorship.
+
+
+
+Initially, cryptography studied methods of information encryption — reversible conversion of open (source) text based on a secret algorithm or key into encrypted text (ciphertext). Traditional cryptography forms a section of symmetric cryptosystems in which encryption and decryption is carried out using the same secret key. By the way, your flag : n33d_1nf0rm4t10n_f0r_y0u. In addition to this section, modern cryptography includes asymmetric cryptosystems, electronic digital signature (EDS) systems, hash functions, key management, obtaining hidden information, quantum cryptography.
