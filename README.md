@@ -8,7 +8,7 @@
 | Guess who?  :heavy_check_mark:  |     Joy |   200 |
 | Google Stierlitz :heavy_check_mark:  |  Crypto |   200 |
 | 7H3 3ND 15 N3V3R  :heavy_check_mark: | Stegano |   200 |
-| EZPZ binary squeezy | Reverse |   301 |
+| EZPZ binary squeezy :white_check_mark: | Reverse |   301 |
 | 38 p4rr075          |     PPC |   500 |
 
 #### Sanity check
