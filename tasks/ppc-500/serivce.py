@@ -1,7 +1,5 @@
 from random import randint
-from time import clock
 import signal
-
 
 
 def generate(lvl):
@@ -28,8 +26,8 @@ if __name__ == '__main__':
         print(i, end='. ')
         quest, answ = generate(i+1)
 
-        if len(str(round(answ, 6))) > 6:
-            print('hard', quest, '=', answ)
+        if len(str(answ).split('.')[1]) > 6:
+            # print('hard', quest, '=', answ)
             continue
 
         print(quest, end=' = ')
