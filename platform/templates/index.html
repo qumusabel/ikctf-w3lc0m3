@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IKCTF-w3lc0m3</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,900" rel="stylesheet">
+    <style type="text/css">
+        body {font-family: Arial, sans-serif;}
+        #page-wrapper {
+            width: 750px;
+            margin: 0 auto;
+        }
+        h1, h2 { font-family: 'Montserrat', sans-serif;}
+        header h1 {
+            margin: 0;
+            font-weight: 900;
+        }
+        .task h2{
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+        .task code{
+            font-size: 16px;
+            font-weight: normal;
+            background: #eeeeee;
+            border-radius: 5px;
+        }
+        .solved { color: green; }
+        .task input[type="text"]::placeholder{ font-style: italic; }
+    </style>
+</head>
+<body>
+<div id="page-wrapper">
+    <header>
+        <h1>IKCTF-w3lc0m3</h1>
+        <p>
+            Можно спрашивать интернет, соседа и ведущих.<br>
+            Файлы и ссылки:
+            <a href="http://www.caesum.com/handbook/Stegsolve.jar">Stegsolve</a> |
+            <a href="https://github.com/masthoon/pwintools">pwintools</a> (windows) или
+            <code>python3 -m pip install pwntools</code> (linux) |
+        </p>
+    </header>
+    <hr>
+    <div id="tasks-wrapper">
+    <span>Поинтов: {{ session['points'] }}</span>
+    <span style="color: red;">{{ get_flashed_messages()[0] }}</span>
+    {% for task in tasks %}
+        <div class="task">
+            <div class="title{% if task.get_id() in session['solved'] %} solved {% endif %}">
+                <h2>{{ task.title }}</h2>
+                <code>{{ task.category }}</code>
+                <i>{{ task.points }} pts.</i>
+            </div>
+            <p>
+                {{ task.desc }}<br>
+                {% for file in task.files %}
+                    <a href="{{ url_for('static', filename=file) }}">{{ file }}</a>
+                {% endfor %}
+            </p>
+            <form action="/" method="post">
+                <input type="hidden" name="id" value="{{ task.get_id() }}">
+                <input type="text" name="flag" placeholder="IKC{flag}" value="{{ task.flag }}">
+                <input type="submit" value="Проверить">
+            </form>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+</body>
+</html>
