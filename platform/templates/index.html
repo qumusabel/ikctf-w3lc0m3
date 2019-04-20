@@ -49,8 +49,9 @@
         <div class="task">
             <div class="title{% if task.get_id() in session['solved'] %} solved {% endif %}">
                 <h2>{{ task.title }}</h2>
-                <code>{{ task.category }}</code>
-                <i>{{ task.points }} pts.</i>
+                <code>{{ task.category }} |
+                <i>{{ task.points }} pts.</i> |
+                решений: {{ task.solutions }}</code>
             </div>
             <p>
                 {{ task.desc }}<br>
@@ -60,7 +61,7 @@
             </p>
             <form action="/" method="post">
                 <input type="hidden" name="id" value="{{ task.get_id() }}">
-                <input type="text" name="flag" placeholder="IKC{flag}" value="{{ task.flag }}">
+                <input type="text" name="flag" placeholder="IKC{flag}">
                 <input type="submit" value="Проверить">
             </form>
         </div>

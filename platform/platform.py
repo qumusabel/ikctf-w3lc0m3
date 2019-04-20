@@ -15,14 +15,13 @@ class Task:
         self.desc = dict['desc']
         self.files = dict['files'].split()
         self.flag = dict['flag']
-        self.solved = False
+        self.solutions = 0
 
     def get_id(self):
         return "{}-{}".format(self.category, self.points)
 
     def check_flag(self, flag):
-        self.solved = self.solved or self.flag == flag
-        return self.solved
+        return flag == self.flag
 
 
 tasks = [Task(i) for i in json.loads(open('tasks.json').read())]
@@ -42,6 +41,7 @@ def index():
             if task.check_flag(flag):
                 session['solved'].append(task.get_id())
                 session['points'] += task.points
+                task.solutions += 1
             else:
                 flash('Неверный флаг!')
 
