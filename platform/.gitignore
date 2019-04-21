@@ -1,3 +1,9 @@
 .idea
 venv
 *.pyc
+static/Bliss_new.png
+static/flag.zip
+static/letter.png
+static/photo.png
+static/task.exe
+static/telegram.txt

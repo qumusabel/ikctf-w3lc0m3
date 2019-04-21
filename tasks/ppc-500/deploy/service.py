@@ -3,13 +3,6 @@
 from random import randint, choice
 import signal
 
-
-def _kill():
-    print("\nYour time's up!")
-    import os
-    os._exit(0)
-
-
 def generate(lvl):
     if lvl == 20:
         return "(22/5) + 75 * 200 ** 2 -25 * 0.25 + 13 ** 2", 3000167.15
@@ -19,19 +12,19 @@ def generate(lvl):
     question = ' '.join(num)
     for i in signs:
         question = question.replace(' ', i, 1)
-    return question, eval(question)
+    answer = eval(question)
+    if float(answer).is_integer():
+        answer = int(answer)
+    return question, answer
 
 
 FLAG = "IKC{38_pythons_54dfd4}"
 
 
 if __name__ == '__main__':
-    import threading
-    kill = threading.Timer(30.0, _kill)
-    kill.start()
-    del threading
+    signal.alarm(30)
     print("ALL RIGHT HERE WE GO!!!")
-
+    
     i = 1
     while i <= 20:
         quest, answ = generate(i+1)
@@ -43,10 +36,10 @@ if __name__ == '__main__':
                 continue
 
         print(quest)
-
-        if input() != str(answ).strip().replace(',', '.'):
+        
+        if input().strip().replace(',', '.') != str(numberize(answ)):
             print('Wrong :(')
-            exit(0)
+            exit() 
 
         i += 1
 

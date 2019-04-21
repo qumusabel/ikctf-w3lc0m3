@@ -1,3 +1,5 @@
+#!../.env/bin/python
+
 import os
 from flask import Flask, flash, get_flashed_messages, url_for, session, redirect, render_template, request, make_response
 import click
@@ -56,5 +58,5 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(port='8080', extra_files='templates/index.html')
+    app.run(host='0.0.0.0', port='80', extra_files='templates/index.html')
 
