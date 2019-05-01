@@ -35,7 +35,7 @@
     "category": "stegano",
     "points": 300,
     "title": "Pssst...",
-    "desc": "Ты знаешь, что делать...",
+    "desc": "Ты знаешь, что делать... Bliss.bmp: <code>216d20df62af34d39089e066d1d4b3af</code>",
     "files": "Bliss_new.bmp",
     "flag": "IKC{5H3_473_7H3_PUDD1N6}"
   },
@@ -57,7 +57,7 @@
   },
   {
     "category": "misc",
-    "points": 0,
+    "points": 100,
     "title": "Sanity check",
     "desc": "Поздравляем с первым решённым таском! <code>IKC{eKs75EiQtefuOVYEKCrX}</code>",
     "files": "",
