@@ -13,7 +13,7 @@ def generate(lvl):
     for i in signs:
         question = question.replace(' ', i, 1)
     answer = eval(question)
-    if float(answer).is_integer():
+    if answer % 1 == 0:
         answer = int(answer)
     return question, answer
 
