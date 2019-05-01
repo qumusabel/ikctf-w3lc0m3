@@ -1,12 +1,9 @@
 #!../.env/bin/python
 
 import os
-from flask import Flask, flash, get_flashed_messages, url_for, session, redirect, render_template, request, make_response
-import click
+from flask import Flask, abort, flash, url_for, session, redirect, render_template, request, \
+                    make_response, send_from_directory
 import json
-
-app = Flask(__name__)
-app.secret_key = os.urandom(16)
 
 
 class Task:
@@ -26,19 +23,40 @@ class Task:
         return flag == self.flag
 
 
-tasks = [Task(i) for i in json.loads(open('tasks.json').read())]
+app = Flask(__name__)
+app.secret_key = os.urandom(16)
+app.config['TASKS_DIR'] = os.path.join(os.path.dirname(os.getcwd()), 'tasks')
+tasks = [Task(i) for i in json.loads(open(os.path.join(app.config['TASKS_DIR'], 'tasks.json'), encoding='utf-8').read())]
 
 
+@app.route('/task/<task_id>/<file>')
+def deploy(task_id, file):
+    task = [i for i in tasks if i.get_id() == task_id]
+
+    task = task[0]
+    if file in task.files:
+        return send_from_directory(os.path.join(app.config['TASKS_DIR'], task.get_id(), 'deploy'), file)
+    else:
+        abort(404)
+
+
+@app.errorhandler(400)
+@app.errorhandler(404)
+def error(code):
+    return render_template('error.html')
+
+
+# MAIN PLATFORM
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        id, flag = request.form['id'], request.form['flag']
+        task_id, flag = request.form['id'], request.form['flag']
 
-        task = [i for i in tasks if i.get_id() == id]
+        task = [i for i in tasks if i.get_id() == task_id]
         if len(task) != 1:
-            return make_response(render_template('400.html'), 400)
-
+            abort(400)
         task = task[0]
+
         if task.get_id() not in session['solved']:
             if task.check_flag(flag):
                 session['solved'].append(task.get_id())
@@ -54,9 +72,8 @@ def index():
             session['solved'] = []
         if 'points' not in session:
             session['points'] = 0
-        return render_template('index.html', tasks=tasks, session=session)
+        return render_template('index.html', tasks=tasks, session=session, host=request.host)
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='80', extra_files='templates/index.html')
-
+    app.run(host='0.0.0.0', port='80')

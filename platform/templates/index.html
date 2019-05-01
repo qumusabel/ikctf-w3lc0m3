@@ -7,43 +7,80 @@
     <style type="text/css">
         body {font-family: Arial, sans-serif;}
         #page-wrapper {
-            width: 750px;
+            width: 1000px;
             margin: 0 auto;
         }
         h1, h2 { font-family: 'Montserrat', sans-serif;}
-        header h1 {
+        /* header h1 {
             margin: 0;
             font-weight: 900;
+        } */
+        header pre {
+        	font-family: Consolas, monospace;
+        	font-size: 8px;
+        	font-weight: bold;
+
+        	user-select: none;
+
+        	/* color: linear-gradient(to right, orange , yellow, green, cyan, blue, violet); */
+        	background: linear-gradient(to bottom, rgba(98,125,77,1) 0%, rgba(56,115,0,1) 55%, rgba(0,56,28,1) 100%);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			
+			display: block;
+			margin: 0 auto;
+        }
+        #tasks-wrapper {
+        	width: 90%;
+        	margin: 0 auto;
         }
         .task h2{
             margin-bottom: 5px;
             font-weight: 700;
         }
-        .task code{
+        code{
             font-size: 16px;
             font-weight: normal;
-            background: #eeeeee;
+            background: #eee;
             border-radius: 5px;
         }
         .solved { color: green; }
-        .task input[type="text"]::placeholder{ font-style: italic; }
+        .task input{
+            -webkit-appearance: none;
+            border: 1px solid gray;
+            height: 20px;
+            box-sizing: border-box;
+        }
+        .task input[type="text"]{ width: 250px; }
     </style>
 </head>
 <body>
 <div id="page-wrapper">
     <header>
-        <h1>IKCTF-w3lc0m3</h1>
+        <!-- <h1>IKCTF-w3lc0m3</h1> -->
+        <pre>
+  __/\\\\\\\\\\\__/\\\________/\\\________/\\\\\\\\\__/\\\\\\\\\\\\\\\__/\\\\\\\\\\\\\\\_____________________________________/\\\\\\\\\\___/\\\\\\______________________/\\\\\\\____________________________/\\\\\\\\\\__        
+   _\/////\\\///__\/\\\_____/\\\//______/\\\////////__\///////\\\/////__\/\\\///////////____________________________________/\\\///////\\\_\////\\\____________________/\\\/////\\\________________________/\\\///////\\\_       
+    _____\/\\\_____\/\\\__/\\\//_______/\\\/_________________\/\\\_______\/\\\______________________________________________\///______/\\\_____\/\\\___________________/\\\____\//\\\______________________\///______/\\\__      
+     _____\/\\\_____\/\\\\\\//\\\______/\\\___________________\/\\\_______\/\\\\\\\\\\\______/\\\\\\\\\\\__/\\____/\\___/\\_________/\\\//______\/\\\________/\\\\\\\\_\/\\\_____\/\\\____/\\\\\__/\\\\\___________/\\\//___     
+      _____\/\\\_____\/\\\//_\//\\\____\/\\\___________________\/\\\_______\/\\\///////______\///////////__\/\\\__/\\\\_/\\\________\////\\\_____\/\\\______/\\\//////__\/\\\_____\/\\\__/\\\///\\\\\///\\\________\////\\\__    
+       _____\/\\\_____\/\\\____\//\\\___\//\\\__________________\/\\\_______\/\\\___________________________\//\\\/\\\\\/\\\____________\//\\\____\/\\\_____/\\\_________\/\\\_____\/\\\_\/\\\_\//\\\__\/\\\___________\//\\\_   
+        _____\/\\\_____\/\\\_____\//\\\___\///\\\________________\/\\\_______\/\\\____________________________\//\\\\\/\\\\\____/\\\______/\\\_____\/\\\____\//\\\________\//\\\____/\\\__\/\\\__\/\\\__\/\\\__/\\\______/\\\__  
+         __/\\\\\\\\\\\_\/\\\______\//\\\____\////\\\\\\\\\_______\/\\\_______\/\\\_____________________________\//\\\\//\\\____\///\\\\\\\\\/____/\\\\\\\\\__\///\\\\\\\\__\///\\\\\\\/___\/\\\__\/\\\__\/\\\_\///\\\\\\\\\/___ 
+          _\///////////__\///________\///________\/////////________\///________\///_______________________________\///__\///_______\/////////_____\/////////_____\////////_____\///////_____\///___\///___\///____\/////////_____
+		</pre>
         <p>
             Можно спрашивать интернет, соседа и ведущих.<br>
-            Файлы и ссылки:
+        <!--Файлы и ссылки:
             <a href="http://www.caesum.com/handbook/Stegsolve.jar">Stegsolve</a> |
             <a href="https://github.com/masthoon/pwintools">pwintools</a> (windows) или
-            <code>python3 -m pip install pwntools</code> (linux) |
+            <code>python3 -m pip install pwntools</code> (linux) | 
+            <a href="">netcat</a> (windows) | -->
         </p>
     </header>
     <hr>
     <div id="tasks-wrapper">
-    <span>Поинтов: {{ session['points'] }}</span>
+    <span><b>Поинтов: {{ session['points'] }}</b></span>
     <span style="color: red;">{{ get_flashed_messages()[0] }}</span>
     {% for task in tasks %}
         <div class="task">
@@ -54,14 +91,14 @@
                 решений: {{ task.solutions }}</code>
             </div>
             <p>
-                {{ task.desc }}<br>
+                {{ task.desc|safe }}<br>
                 {% for file in task.files %}
-                    <a href="{{ url_for('static', filename=file) }}">{{ file }}</a>
+                    <a href="{{ url_for('deploy', task_id=task.get_id(), file=file) }}">{{ file }}</a>
                 {% endfor %}
             </p>
             <form action="/" method="post">
                 <input type="hidden" name="id" value="{{ task.get_id() }}">
-                <input type="text" name="flag" placeholder="IKC{flag}">
+                <input type="text" name="flag" placeholder="IKC{flag}" autocomplete="off">
                 <input type="submit" value="Проверить">
             </form>
         </div>

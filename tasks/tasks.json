@@ -1,17 +1,9 @@
 [
   {
-    "category": "misc",
-    "points": 0,
-    "title": "Sanity check",
-    "desc": "Поздравляем с первым решённым таском! <code>IKC{eKs75EiQtefuOVYEKCrX}</code>",
-    "files": "",
-    "flag": "IKC{eKs75EiQtefuOVYEKCrX}"
-  },
-  {
     "category": "forensics",
     "points": 100,
     "title": "Hackerman",
-    "desc": "Мы нашли флешку с каким-то архивом. А вот посмотреть, что в нем, увы, не можем - пароль. Надежда только на тебя, а впрочем, тебе это раз плюнуть. <i>Ведь так</i>?",
+    "desc": "Мы нашли флешку с каким-то архивом. А вот посмотреть, что в нем, увы, не можем - стоит пароль. Надежда только на тебя, а впрочем, тебе это раз плюнуть, не так ли?",
     "files": "flag.zip",
     "flag": "IKC{50_h4rd_p4ssw0rd_ab12af}"
   },
@@ -62,5 +54,13 @@
     "desc": "Решишь всё - получишь флаг. <code>nc &lt;ip&gt; 1337</code>",
     "files": "",
     "flag": "IKC{38_pythons_54dfd4}"
+  },
+  {
+    "category": "misc",
+    "points": 0,
+    "title": "Sanity check",
+    "desc": "Поздравляем с первым решённым таском! <code>IKC{eKs75EiQtefuOVYEKCrX}</code>",
+    "files": "",
+    "flag": "IKC{eKs75EiQtefuOVYEKCrX}"
   }
 ]
