@@ -13,8 +13,6 @@ def generate(lvl):
     for i in signs:
         question = question.replace(' ', i, 1)
     answer = eval(question)
-    if answer % 1 == 0:
-        answer = int(answer)
     return question, answer
 
 
@@ -37,7 +35,8 @@ if __name__ == '__main__':
 
         print(quest)
         
-        if input().strip().replace(',', '.') != str(numberize(answ)):
+        uansw = input().strip().replace(',', '.')
+        if float(uansw) != answ:
             print('Wrong :(')
             exit() 
 

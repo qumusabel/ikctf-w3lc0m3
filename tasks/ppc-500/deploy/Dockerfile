@@ -3,10 +3,9 @@ FROM ubuntu:bionic
 RUN apt-get update
 RUN apt-get install -y python3 ucspi-tcp 
 
-
 RUN useradd service -m
 RUN passwd -d service
-COPY * /
+COPY service.py /
 RUN chmod +x service.py 
 WORKDIR /
 
